@@ -56,7 +56,128 @@ function board(h, w, number) {
 		return array;
 	}
 
+	// get number of surrounding marked mine
+	this.surroundingMarked = function(i, j, num) {
+		var res = 0;
+		// left 
+		if (i > 0 && arr[i - 1][j].flag == num) {
+			res++;
+		}
+		// right
+		if (i < num_col - 1 && arr[i + 1][j].flag == num) {
+			res++;
+		}
+		// up
+		if (j > 0 && arr[i][j - 1].flag == num) {
+			res++;
+		}
+		// down
+		if (j < num_row - 1 && arr[i][j + 1].flag == num) {
+			res++;
+		}
+		// left-up
+		if (i > 0 && j > 0 && arr[i - 1][j - 1].flag == num) {
+			res++;
+		}
+		// right-up
+		if (i > 0 && j < num_row - 1 && arr[i - 1][j + 1].flag == num) {
+			res++;
+		}
+		// left-down
+		if (i < num_col - 1 && j > 0 && arr[i + 1][j - 1].flag == num) {
+			res++;
+		}
+		// right-down
+		if (i < num_col - 1 && j < num_row - 1 && arr[i + 1][j + 1].flag == num) {
+			res++;
+		}
+		return res;
 
+	}
+
+	/**
+	*  get opened boundary
+	*
+	*/	
+	this.getOpenBoundary = function() {
+		var array = [];
+		for (var i = 0; i < num_col; i++) {
+			for (var j = 0; j < num_row; j++) {
+				if (arr[i][j].flag == 1 && arr[i][j].count != 0 && arr[i][j].count != this.surroundingMarked(i, j, 2)) {
+					array.push(i * num_row + j);
+				}
+			}
+		}
+		return array;
+	}
+
+
+	this.besidesBoundary = function(i, j) {
+		// left 
+		if (i > 0 && arr[i - 1][j].flag == 1) {
+			return true;
+		}
+		// right
+		if (i < num_col - 1 && arr[i + 1][j].flag == 1) {
+			return true;
+		}
+		// up
+		if (j > 0 && arr[i][j - 1].flag == 1) {
+			return true;
+		}
+		// down
+		if (j < num_row - 1 && arr[i][j + 1].flag == 1) {
+			return true;
+		}
+		// left-up
+		if (i > 0 && j > 0 && arr[i - 1][j - 1].flag == 1) {
+			return true;
+		}
+		// right-up
+		if (i > 0 && j < num_row - 1 && arr[i - 1][j + 1].flag == 1) {
+			return true;
+		}
+		// left-down
+		if (i < num_col - 1 && j > 0 && arr[i + 1][j - 1].flag == 1) {
+			return true;
+		}
+		// right-down
+		if (i < num_col - 1 && j < num_row - 1 && arr[i + 1][j + 1].flag == 1) {
+			return true;
+		}
+		return false;
+	}
+
+
+	this.getCount = function(i, j) {
+		return arr[i][j].count;
+	}
+	this.getFlag = function(i, j) {
+		return arr[i][j].flag;
+	}
+
+	/**
+	*  get unknown boundary
+	*
+	*/		
+	this.getUnknownBoundary = function() {
+		var array = [];
+		for (var i = 0; i < num_col; i++) {
+			for (var j = 0; j < num_row; j++) {
+				if (arr[i][j].flag == 0 && this.besidesBoundary(i, j)) {
+					array.push(i * num_row + j);
+				}
+			}
+		}
+		return array;
+	}
+
+	this.setMark = function(i, j) {
+		arr[i][j].flag = 2;
+	}
+	this.setUnknown = function(i, j) {
+		arr[i][j].flag = 0;
+	}
 	/**
 	 * get number of unopened grid around current index (AI)
 	 */

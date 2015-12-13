@@ -71,7 +71,55 @@ function AIshow() {
 
 		var number_open_after = b.get_number_open();
 		console.log(number_open_after);
+		if(number_open_after == number_open_before) {
+			console.log(TankSolver());
+		}
 	
+	}
+	function TankSolver() {
+		var unknown = b.getUnknownBoundary();
+		var boundary = b.getOpenBoundary();
+		var stats = new Array;
+		for (var i = 0; i < unknown.length; i++) {
+			stats[i] = 0;
+		}
+		recurse(unknown, boundary, stats, 0);
+		return stats;
+	}
+	function recurse(unknown, boundary, stats, k) {
+		//console.log(k);
+		for (var i = 0; i < boundary.length; i++) {
+			var cur = boundary[i];
+			var col = Math.floor(cur / num_row);
+			var row = Math.floor(cur % num_row);
+			if (b.surroundingMarked(col, row, 2) > b.getCount(col, row)) {
+				return;
+			}
+			if (b.surroundingMarked(col, row, 0) < b.getCount(col, row) - b.surroundingMarked(col, row, 2)) {
+				return;
+			}
+		}
+		if (k == unknown.length) {
+			console.log("findAnswer");
+			for (var i = 0; i < unknown.length; i++) {
+				var cur = unknown[i];
+				var col = Math.floor(cur / num_row);
+				var row = Math.floor(cur % num_row);
+				if (b.getFlag(col, row) == 2) {
+					console.log("find mine:" + cur);
+					stats[i] = stats[i] + 1;
+				}
+			}
+			return;
+		}
+		var cur = unknown[k];
+		var col = Math.floor(cur / num_row);
+		var row = Math.floor(cur % num_row);
+		b.setMark(col, row);
+		recurse(unknown, boundary, stats, k + 1);
+		b.setUnknown(col, row);
+		recurse(unknown, boundary, stats, k + 1);
+
 	}
 
 }
