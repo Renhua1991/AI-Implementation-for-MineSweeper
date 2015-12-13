@@ -18,6 +18,7 @@ function grid() {
     * 0 for normal grid;
     * 1 for open grid;
     * 2 for grid marked as mine;
+    * 3 for assuming empty
     */
     this.flag = 0;
 
