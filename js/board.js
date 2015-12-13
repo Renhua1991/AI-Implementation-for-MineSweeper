@@ -38,6 +38,15 @@ function board(h, w, number) {
 
 
 	/**
+	*  get game status
+	*
+	*/
+	this.getGameStatus = function() {
+		return end;
+	}
+
+
+	/**
 	*  get all opened grid for use of AI
 	*
 	*/
@@ -337,7 +346,7 @@ function board(h, w, number) {
 			for (var j = 0; j < y; j++) {
 				// draw the interface.
 				if (arr[i][j].isMine) {
-					ctx.fillStyle = "grey";
+					ctx.fillStyle = "#3399FF";
 					ctx.fillRect((size_grid + size_blank) * i, (size_grid + size_blank) * j, size_grid, size_grid);
 					// ctx.fillStyle = "black";
 					// ctx.font = '12pt Calibri';
@@ -348,7 +357,7 @@ function board(h, w, number) {
 					// ctx.fillRect((size_grid + size_blank) * i, (size_grid + size_blank) * j, size_grid, size_grid);
 					
 				} else {
-					ctx.fillStyle = "grey";
+					ctx.fillStyle = "#3399FF";
 					ctx.fillRect((size_grid + size_blank) * i, (size_grid + size_blank) * j, size_grid, size_grid);
 					// ctx.fillStyle = "black";
 					// ctx.font = '12pt Calibri';
@@ -389,12 +398,12 @@ function board(h, w, number) {
 				arr[x][y].flag = 1;
 				//console.log(arr[x][y].flag);
 				if (arr[x][y].isMine) {
-					show_mines();
+					this.show_mines();
 					end = true;
 					start_time = 0;
 					document.getElementById("timer").innerHTML = "Oops! You lose the game!";
 				} else {
-					ctx.fillStyle = "yellow";
+					ctx.fillStyle = "#E8E8E8";
 					ctx.fillRect((size_grid + size_blank) * x, (size_grid + size_blank) * y, size_grid, size_grid);
 					ctx.fillStyle = "black";
 					ctx.font = '12pt Calibri';
@@ -424,12 +433,12 @@ function board(h, w, number) {
 	this.mark_grid = function(x, y) {
 		if (arr[x][y].flag == 0) {
 			arr[x][y].flag = 2;
-			ctx.fillStyle = "green";
+			ctx.fillStyle = "#9966FF";
 			ctx.fillRect((size_grid + size_blank) * x, (size_grid + size_blank) * y, size_grid, size_grid);
 			
 		} else if (arr[x][y].flag == 2) {
 			arr[x][y].flag = 0;
-			ctx.fillStyle = "grey";
+			ctx.fillStyle = "#3399FF";
 			ctx.fillRect((size_grid + size_blank) * x, (size_grid + size_blank) * y, size_grid, size_grid);
 		}
 		
@@ -446,7 +455,7 @@ function board(h, w, number) {
 	this.mark_grid_AI = function(x, y) {
 		if (arr[x][y].flag == 0) {
 			arr[x][y].flag = 2;
-			ctx.fillStyle = "green";
+			ctx.fillStyle = "#9966FF";
 			ctx.fillRect((size_grid + size_blank) * x, (size_grid + size_blank) * y, size_grid, size_grid);	
 		} 
 	}
@@ -617,7 +626,7 @@ function board(h, w, number) {
 				board[i][j].isVisited = true;
 
 				if (board[i][j].count == 0) {
-					ctx.fillStyle = "yellow";
+					ctx.fillStyle = "#E8E8E8";
 					ctx.fillRect((size_grid + size_blank) * i, (size_grid + size_blank) * j, size_grid, size_grid);
 					// ctx.fillStyle = "black";
 					// ctx.font = '12pt Calibri';
@@ -673,7 +682,7 @@ function board(h, w, number) {
 					}
 
 				} else {
-					ctx.fillStyle = "yellow";
+					ctx.fillStyle = "#E8E8E8";
 					ctx.fillRect((size_grid + size_blank) * i, (size_grid + size_blank) * j, size_grid, size_grid);
 					ctx.fillStyle = "black";
 					ctx.font = '12pt Calibri';
@@ -688,13 +697,13 @@ function board(h, w, number) {
 	* show all mines when user die
 	*
 	*/
-	function show_mines() {
+	this.show_mines = function() {
 		for (var i = 0; i < num_col; i++) {
 			for (var j = 0; j < num_row; j++) {
 				if (arr[i][j].isMine) {
-					ctx.fillStyle = "blue";
+					ctx.fillStyle = "#663366";
 					ctx.fillRect((size_grid + size_blank) * i, (size_grid + size_blank) * j, size_grid, size_grid);
-				}
+				} 
 			}
 		}
 	}

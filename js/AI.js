@@ -171,5 +171,22 @@ function AIshow() {
 		recurse(unknown, boundary, stats, k + 1);
 		b.setFlag(col, row, 0);
 	}
+
+	/**
+	 * automatically solve minesweeper using AI algo
+	 */
+	this.autoSolver = function() {
+		// while (b.getGameStatus() == false) {
+		// 	console.log("aaaaa");
+		// 	this.straightForward();
+		// 	console.log(b.getGameStatus());
+		// }
+
+		for (var i = 0; i < 10; i++) {
+			console.log("aaaaa");
+			this.straightForward();
+			console.log(b.getGameStatus());
+		}
+	}
 }
 

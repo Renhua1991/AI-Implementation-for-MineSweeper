@@ -38,15 +38,23 @@ window.onload = function(){
 	};
 
 
-	if (document.getElementById("AI")) {
-		document.getElementById('AI').onclick = function() {
-			console.log("ai show");
-			var ai = new AIshow();
-			ai.straightForward();
-			//ai.getPeripheryIndex();
-		};
-	}
+	document.getElementById('AI').onclick = function() {
+		console.log("ai show");
+		var ai = new AIshow();
+		ai.straightForward();
+		//ai.getPeripheryIndex();
+	};
 	
+
+	document.getElementById('answer').onclick = function() {
+		b.show_mines();
+		//ai.getPeripheryIndex();
+	};
+
+	document.getElementById('autoPlay').onclick = function() {
+		var ai = new AIshow();
+		ai.autoSolver();
+	};
 
 	/**
 	* add left click listener on canvas 

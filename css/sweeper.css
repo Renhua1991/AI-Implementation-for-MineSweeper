@@ -12,13 +12,27 @@
 }
 
 #diff {
-    border: 1px solid black;
+	height: 80px;
+    /*border-width: 5px;	
+    border-style: dashed;*/
+    background-color: #E0E0E0;
 }
 
 #move {
-    border: 1px solid black;
+	height: 80px;
+    background-color: #E0E0E0  ;
 }
 
 #info {
-    border: 1px solid black;
+	height: 80px;
+    background-color: #E0E0E0  ;
 }
+
+#auto {
+	height: 80px;
+    background-color: #E0E0E0  ;
+}
+
+/*#bannerwrap {
+	background-color: #E0E0E0;
+}*/
