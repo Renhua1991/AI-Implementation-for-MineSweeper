@@ -17,7 +17,6 @@ function AIshow() {
 		var y = Math.floor(index % num_row);
 		
 		var number_open_before = b.get_number_open();
-		console.log(number_open_before);
 
 		/*
         * make sure that user can't click a mine or a grid with count don't equal 0
@@ -28,7 +27,7 @@ function AIshow() {
                 b.init();
             }
             first_time = false;
-
+            start_time = new Date().getTime();
             // open the grid with 0 mines around
 	        b.open_grid(x, y);
 
@@ -70,7 +69,6 @@ function AIshow() {
 		}
 
 		var number_open_after = b.get_number_open();
-		console.log(number_open_after);
 	
 	}
 
