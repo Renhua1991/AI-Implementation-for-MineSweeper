@@ -447,22 +447,15 @@ function board(h, w, number) {
 	this.mark_grid = function(x, y) {
 		if (arr[x][y].flag == 0) {
 			arr[x][y].flag = 2;
-<<<<<<< HEAD
-			ctx.fillStyle = "#9966FF";
-=======
 			remain--;
-			ctx.fillStyle = "green";
->>>>>>> origin/master
+			ctx.fillStyle = "#9966FF";
+
 			ctx.fillRect((size_grid + size_blank) * x, (size_grid + size_blank) * y, size_grid, size_grid);
 			
 		} else if (arr[x][y].flag == 2) {
 			arr[x][y].flag = 0;
-<<<<<<< HEAD
 			ctx.fillStyle = "#3399FF";
-=======
-			ctx.fillStyle = "grey";
 			remain++;
->>>>>>> origin/master
 			ctx.fillRect((size_grid + size_blank) * x, (size_grid + size_blank) * y, size_grid, size_grid);
 		}
 		
@@ -481,12 +474,8 @@ function board(h, w, number) {
 	this.mark_grid_AI = function(x, y) {
 		if (arr[x][y].flag == 0) {
 			arr[x][y].flag = 2;
-<<<<<<< HEAD
-			ctx.fillStyle = "#9966FF";
-=======
 			remain--;
-			ctx.fillStyle = "green";
->>>>>>> origin/master
+			ctx.fillStyle = "#9966FF";
 			ctx.fillRect((size_grid + size_blank) * x, (size_grid + size_blank) * y, size_grid, size_grid);	
 		} 
 	}
