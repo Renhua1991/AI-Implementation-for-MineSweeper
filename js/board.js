@@ -61,7 +61,7 @@ function board(h, w, number) {
 	/**
 	 * get number of unopened grid around current index (AI)
 	 */
-	this.checkNumberOfPeripheryGrids = function(i, j) {
+	this.MarkPeripheryGrids = function(i, j) {
 		var array = [];
 		var res = 0;
 		// console.log(i);
@@ -118,6 +118,22 @@ function board(h, w, number) {
 				this.mark_grid_AI(Math.floor(index_x), Math.floor(index_y));
 			}
 		}
+	}
+
+
+	/**
+	 * get how many grids are already opened (use for triggering advanced algorithm) 
+	 */
+	this.get_number_open = function() {
+		return num_open;
+	}
+
+
+	/**
+	 * get number of unopened grid around current index (AI)
+	 */
+	this.OpenPeripheryGrids = function(i, j) {
+		this.double_grid(i, j);
 	}
 
 
