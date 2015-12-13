@@ -57,6 +57,10 @@ function AIshow() {
 			var max = 0;
 			var stats = TankSolver();
 			var unknown = b.getUnknownBoundary();
+			if (unknown.length == 0) {
+				b.randomClick();
+				return;
+			}
 			for (var i =0; i < stats.length; i++) {
 				if (stats[i] == 0) {
 					min = 0;
@@ -132,11 +136,13 @@ function AIshow() {
 		for (var i = 0; i < unknown.length; i++) {
 			stats[i] = 0;
 		}
-		recurse(unknown, boundary, stats, 0);
+
+		recurse(unknown, boundary, stats, 0, b.getRemain());
+		//recurse(unknown, boundary, stats, 0);
 		return stats;
 	}
-
-	function recurse(unknown, boundary, stats, k) {
+	//using remain
+	function recurse(unknown, boundary, stats, k, remain) {
 		for (var i = 0; i < boundary.length; i++) {
 			var cur = boundary[i];
 			var col = Math.floor(cur / num_row);
@@ -152,6 +158,21 @@ function AIshow() {
 			}
 		}
 		if (k == unknown.length) {
+			var total = 0;
+			for (var i = 0; i < unknown.length; i++) {
+				var cur = unknown[i];
+				var col = Math.floor(cur / num_row);
+				var row = Math.floor(cur % num_row);
+				if (b.getFlag(col, row) == 2) {
+					total++;
+				}
+			}
+			if (total > remain){
+				console.log("invalid");
+				return;
+
+			} 
+
 			for (var i = 0; i < unknown.length; i++) {
 				var cur = unknown[i];
 				var col = Math.floor(cur / num_row);
