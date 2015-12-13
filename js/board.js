@@ -9,7 +9,6 @@ function board(h, w, number) {
 	var num = number;
 
 	var arr = [];
-	var remain = number;
 	/**
 	* judge if the game is end or not
 	*/
@@ -173,11 +172,6 @@ function board(h, w, number) {
 	}
 
 	this.setFlag = function(i, j, num) {
-		if (arr[i][j].flag != 2 && num == 2) {
-			remain--;
-		} else if (arr[i][j].flag == 2 && num != 2) {
-			remain++;
-		}
 		arr[i][j].flag = num;
 	}
 
@@ -430,13 +424,11 @@ function board(h, w, number) {
 	this.mark_grid = function(x, y) {
 		if (arr[x][y].flag == 0) {
 			arr[x][y].flag = 2;
-			remain--;
 			ctx.fillStyle = "green";
 			ctx.fillRect((size_grid + size_blank) * x, (size_grid + size_blank) * y, size_grid, size_grid);
 			
 		} else if (arr[x][y].flag == 2) {
 			arr[x][y].flag = 0;
-			remain++;
 			ctx.fillStyle = "grey";
 			ctx.fillRect((size_grid + size_blank) * x, (size_grid + size_blank) * y, size_grid, size_grid);
 		}
@@ -454,14 +446,9 @@ function board(h, w, number) {
 	this.mark_grid_AI = function(x, y) {
 		if (arr[x][y].flag == 0) {
 			arr[x][y].flag = 2;
-			remain--;
 			ctx.fillStyle = "green";
 			ctx.fillRect((size_grid + size_blank) * x, (size_grid + size_blank) * y, size_grid, size_grid);	
 		} 
-	}
-
-	this.getRemain = function(){
-		return remain;
 	}
 	/**
 	* double click the grid at (x, y)

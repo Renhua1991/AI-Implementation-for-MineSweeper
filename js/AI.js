@@ -135,7 +135,7 @@ function AIshow() {
 		recurse(unknown, boundary, stats, 0);
 		return stats;
 	}
-	// recursion using remain
+
 	function recurse(unknown, boundary, stats, k) {
 		for (var i = 0; i < boundary.length; i++) {
 			var cur = boundary[i];
@@ -152,17 +152,6 @@ function AIshow() {
 			}
 		}
 		if (k == unknown.length) {
-			// var remain = b.getRemain();
-			// for (var i = 0; i < unknown.length; i++) {
-			// 	var cur = unknown[i];
-			// 	var col = Math.floor(cur / num_row);
-			// 	var row = Math.floor(cur % num_row);
-			// 	var row = Math.floor(cur % num_row);
-			// 	if (b.getFlag(col, row) == 2) {
-			// 		remain--;
-			// 	}
-			// }
-			// if(remain < 0) return;
 			for (var i = 0; i < unknown.length; i++) {
 				var cur = unknown[i];
 				var col = Math.floor(cur / num_row);
@@ -182,44 +171,5 @@ function AIshow() {
 		recurse(unknown, boundary, stats, k + 1);
 		b.setFlag(col, row, 0);
 	}
-
-	// // do not use remain
-	// function recurse(unknown, boundary, stats, k) {
-	// 	//console.log(k);
-	// 	for (var i = 0; i < boundary.length; i++) {
-	// 		var cur = boundary[i];
-	// 		var col = Math.floor(cur / num_row);
-	// 		var row = Math.floor(cur % num_row);
-	// 		// too many mines
-	// 		if (b.surroundingMarked(col, row, 2) > b.getCount(col, row)) {
-	// 			return;
-	// 		}
-	// 		// too many empties
-	// 		if (b.surroundingMarked(col, row, 0) + b.surroundingMarked(col, row, 2)
-	// 			< b.getCount(col, row)) {
-	// 			return;
-	// 		}
-	// 	}
-	// 	if (k == unknown.length) {
-	// 		for (var i = 0; i < unknown.length; i++) {
-	// 			var cur = unknown[i];
-	// 			var col = Math.floor(cur / num_row);
-	// 			var row = Math.floor(cur % num_row);
-	// 			if (b.getFlag(col, row) == 2) {
-	// 				stats[i] = stats[i] + 1;
-	// 			}
-	// 		}
-	// 		return;
-	// 	}
-	// 	var cur = unknown[k];
-	// 	var col = Math.floor(cur / num_row);
-	// 	var row = Math.floor(cur % num_row);
-	// 	b.setFlag(col, row, 2);
-	// 	recurse(unknown, boundary, stats, k + 1);
-	// 	b.setFlag(col, row, 3);
-	// 	recurse(unknown, boundary, stats, k + 1);
-	// 	b.setFlag(col, row, 0);
-	// }
-
 }
 
