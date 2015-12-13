@@ -19,8 +19,7 @@ function board(h, w, number) {
 	* x is height, y is width, num is the number of mines
 	*/
 	var num_open = 0;
-
-
+	
 	canvas = document.getElementById("canvas");
 	ctx = canvas.getContext("2d");
 
