@@ -7,7 +7,7 @@ function board(h, w, number) {
 	var x = h;
 	var y = w;
 	var num = number;
-
+	var remain = number;
 	var arr = [];
 	/**
 	* judge if the game is end or not
@@ -181,6 +181,11 @@ function board(h, w, number) {
 	}
 
 	this.setFlag = function(i, j, num) {
+		if (arr[i][j].flag == 2 && num != 2) {
+			remain ++;
+		} else if (arr[i][j].flag != 2 && num == 2) {
+			remain--;
+		}
 		arr[i][j].flag = num;
 	}
 
@@ -421,7 +426,16 @@ function board(h, w, number) {
 			}
 		}
 	}
-
+	this.randomClick = function() {
+		for (var i = 0; i < num_col; i++) {
+			for (var j = 0; j < num_row; j++) {
+				if (arr[i][j].flag == 0) {
+					this.open_grid(i, j);
+					return;
+				}
+			}
+		}
+	}
 
 	/**
 	* mark the grid at (x, y)
@@ -433,18 +447,30 @@ function board(h, w, number) {
 	this.mark_grid = function(x, y) {
 		if (arr[x][y].flag == 0) {
 			arr[x][y].flag = 2;
+<<<<<<< HEAD
 			ctx.fillStyle = "#9966FF";
+=======
+			remain--;
+			ctx.fillStyle = "green";
+>>>>>>> origin/master
 			ctx.fillRect((size_grid + size_blank) * x, (size_grid + size_blank) * y, size_grid, size_grid);
 			
 		} else if (arr[x][y].flag == 2) {
 			arr[x][y].flag = 0;
+<<<<<<< HEAD
 			ctx.fillStyle = "#3399FF";
+=======
+			ctx.fillStyle = "grey";
+			remain++;
+>>>>>>> origin/master
 			ctx.fillRect((size_grid + size_blank) * x, (size_grid + size_blank) * y, size_grid, size_grid);
 		}
 		
 	}
 
-
+	this.getRemain = function() {
+		return remain;
+	}
 	/**
 	* mark the grid at (x, y)
 	* status code 2 means the grid is marked as mine by user
@@ -455,7 +481,12 @@ function board(h, w, number) {
 	this.mark_grid_AI = function(x, y) {
 		if (arr[x][y].flag == 0) {
 			arr[x][y].flag = 2;
+<<<<<<< HEAD
 			ctx.fillStyle = "#9966FF";
+=======
+			remain--;
+			ctx.fillStyle = "green";
+>>>>>>> origin/master
 			ctx.fillRect((size_grid + size_blank) * x, (size_grid + size_blank) * y, size_grid, size_grid);	
 		} 
 	}
