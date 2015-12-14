@@ -762,5 +762,87 @@ function board(h, w, number) {
 		console.log("time used:" + time);
 	}
 
+	this.numberOfIsland = function() {
+		var unknown = this.getUnknownBoundary();
+		var board = [];
+		var islands = new Array;
+		for (var i = 0; i < num_col; i++) {
+			for (var j = 0; j < num_row; j++) {
+				if (j == 0) {
+					board[i] = new Array;
+				}
+				board[i][j] = 0;
+			}
+		}
+		for (var i = 0; i < unknown.length; i++) {
+			var cur = unknown[i];
+			var col = Math.floor(cur / num_row);
+			var row = Math.floor(cur % num_row);
+			board[col][row] = 1;
+		}
+		for (var i = 0; i < board.length; i++) {
+			for (var j = 0; j < board[0].length; j++) {
+				if (board[i][j] == 1) {
+					var list = new Array;
+					list.push(i * num_row + j);
+					board[i][j] = 0;
+					dfs(board, i, j, list);
+					islands.push(list);
+				}
+			}
+		}
+		return islands;
+	}
+	function dfs(board, i, j, list) {
+		// left 
+		if (i > 0 && board[i - 1][j] == 1) {
+			list.push((i - 1) * num_row + j);
+			board[i - 1][j] = 0;
+			dfs(board, i - 1, j, list);
+		}
+		// right
+		if (i < num_col - 1 && board[i + 1][j] == 1) {
+			list.push((i + 1) * num_row + j);
+			board[i + 1][j] = 0;
+			dfs(board, i + 1, j, list);
+		}
+		// up
+		if (j > 0 && board[i][j - 1] == 1) {
+			list.push(i * num_row + j - 1);
+			board[i][j - 1] = 0;
+			dfs(board, i, j - 1, list);
+		}
+		// down
+		if (j < num_row - 1 && board[i][j + 1] == 1) {
+			list.push(i * num_row + j + 1);
+			board[i][j + 1] = 0;
+			dfs(board, i, j + 1, list);
+		}
+		// left-up
+		if (i > 0 && j > 0 && board[i - 1][j - 1] == 1) {
+			list.push((i - 1) * num_row + j - 1);
+			board[i - 1][j - 1] = 0;
+			dfs(board, i - 1, j - 1, list);
+		}
+		// right-up
+		if (i > 0 && j < num_row - 1 && board[i - 1][j + 1] == 1) {
+			list.push((i - 1) * num_row + j + 1);
+			board[i - 1][j + 1] = 0;
+			dfs(board, i - 1, j + 1, list);
+		}
+		// left-down
+		if (i < num_col - 1 && j > 0 && board[i + 1][j - 1] == 1) {
+			list.push((i + 1) * num_row + j - 1);
+			board[i + 1][j - 1] = 0;
+			dfs(board, i + 1, j - 1, list);
+		}
+		// right-down
+		if (i < num_col - 1 && j < num_row - 1 && board[i + 1][j + 1] == 1) {
+			list.push((i + 1) * num_row + j + 1);
+			board[i + 1][j + 1] = 0;
+			dfs(board, i + 1, j + 1, list);
+		}
+	}
+
 
 }
