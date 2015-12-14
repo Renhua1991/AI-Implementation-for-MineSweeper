@@ -327,13 +327,13 @@ function board(h, w, number) {
 	*
 	*/
 	this.init = function() {
-		console.log(" i am initializing   ......  ");
-		console.log(" X " + x);
-		console.log(" Y " + y);
+		// console.log(" i am initializing   ......  ");
+		// console.log(" X " + x);
+		// console.log(" Y " + y);
 
 
 		win = false;
-		console.log(" win  " + win);
+		//console.log(" win  " + win);
 
 		/**
 		* initialize canvas

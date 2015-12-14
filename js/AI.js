@@ -61,6 +61,8 @@ function AIshow() {
 			if (unknown.length == 0) {
 				b.randomClick();
 				//document.getElementById("AI").disabled = false;
+				document.getElementById("AI").disabled = false;
+				judge = false;
 				return;
 			}
 			if (b.getUnknownBoundary().length <= 10) {
@@ -68,7 +70,10 @@ function AIshow() {
 			}
 			//singleAreaSolve();
 			else islandSolve();
+
 		}
+		document.getElementById("AI").disabled = false;
+		judge = false;
 	
 	}
 	function islandSolve() {
@@ -152,11 +157,9 @@ function AIshow() {
 				return;
 			}
 		}
-<<<<<<< HEAD
-		document.getElementById("AI").disabled = false;
-		judge = false;
+
+
 	
-=======
 		if (k == unknown.length) {
 			var total = 0;
 			for (var i = 0; i < unknown.length; i++) {
@@ -221,7 +224,7 @@ function AIshow() {
 			// markLargest(stats, max, unknown);
 			 compareLeastLargest(stats, min, max, unknown);
 		}
->>>>>>> origin/master
+
 	}
 	function clickLeast(stats, min, unknown) {
 		// console.log(stats);
@@ -271,13 +274,8 @@ function AIshow() {
 		}
 
 	}
-<<<<<<< HEAD
-	function TankSolver() {
-		//console.log("Tank");
-		var unknown = b.getUnknownBoundary();
-=======
+
 	function TankSolver(unknown) {
->>>>>>> origin/master
 		var boundary = b.getOpenBoundary();
 		var stats = new Array;
 		for (var i = 0; i < unknown.length; i++) {
@@ -339,11 +337,8 @@ function AIshow() {
 		b.setFlag(col, row, 2);
 		recurse(unknown, boundary, stats, k + 1, remain);
 		b.setFlag(col, row, 3);
-<<<<<<< HEAD
+
 		recurse(unknown, boundary, stats, k + 1, remain);
-=======
-		recurse(unknown, boundary, stats, k + 1,remain);
->>>>>>> origin/master
 		b.setFlag(col, row, 0);
 	}
 
@@ -352,7 +347,6 @@ function AIshow() {
 	 * automatically solve minesweeper using AI algo
 	 */
 	this.autoSolver = function() {
-<<<<<<< HEAD
 		// while (b.getGameStatus() == false) {
 		// 	console.log("aaaaa");
 		// 	this.straightForward();
@@ -361,14 +355,11 @@ function AIshow() {
 		while (b.getGameStatus() == false && judge == false) {
 			//console.log("aaaaa");
 			
-=======
-		for (var i = 0; i < 10; i++) {
-			console.log("aaaaa");
->>>>>>> origin/master
+
 			this.straightForward();
-			//console.log("judge : " + judge);
+			console.log("!!!!!!!!!!!!!!!!! judge : " + judge);
 		
-			//console.log(b.getGameStatus());
+			console.log("!!!!!!!!!!!!!!!!!" + b.getGameStatus());
 		}
 		// for (var i = 0; i < 10; i++) {
 		// 	console.log("aaaaa");
