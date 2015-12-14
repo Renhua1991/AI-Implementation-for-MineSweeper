@@ -60,17 +60,13 @@ function AIshow() {
 			var unknown = b.getUnknownBoundary();
 			if (unknown.length == 0) {
 				b.randomClick();
-				//document.getElementById("AI").disabled = false;
-				document.getElementById("AI").disabled = false;
-				judge = false;
 				return;
 			}
-			if (b.getUnknownBoundary().length <= 10) {
-				singleAreaSolve();
-			}
-			//singleAreaSolve();
-			else islandSolve();
-
+			singleAreaSolve();
+			// if (b.getUnknownBoundary().length <= 10) {
+			// 	singleAreaSolve();
+			// }
+			// else islandSolve();
 		}
 		document.getElementById("AI").disabled = false;
 		judge = false;
@@ -283,7 +279,6 @@ function AIshow() {
 		}
 
 		recurse(unknown, boundary, stats, 0, b.getRemain());
-		//recurse(unknown, boundary, stats, 0);
 		return stats;
 	}
 
@@ -347,25 +342,9 @@ function AIshow() {
 	 * automatically solve minesweeper using AI algo
 	 */
 	this.autoSolver = function() {
-		// while (b.getGameStatus() == false) {
-		// 	console.log("aaaaa");
-		// 	this.straightForward();
-		// 	console.log(b.getGameStatus());
-		// }
 		while (b.getGameStatus() == false && judge == false) {
-			//console.log("aaaaa");
-			
-
 			this.straightForward();
-			console.log("!!!!!!!!!!!!!!!!! judge : " + judge);
-		
-			console.log("!!!!!!!!!!!!!!!!!" + b.getGameStatus());
 		}
-		// for (var i = 0; i < 10; i++) {
-		// 	console.log("aaaaa");
-		// 	this.straightForward();
-		// 	console.log(b.getGameStatus());
-		// }
 	}
 
 

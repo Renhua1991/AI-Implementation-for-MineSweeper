@@ -209,9 +209,6 @@ function board(h, w, number) {
 	this.MarkPeripheryGrids = function(i, j) {
 		var array = [];
 		var res = 0;
-		// console.log(i);
-		// console.log(j);
-		
 		// left 
 		if (i > 0 && arr[i - 1][j].flag != 1) {
 			res++;
@@ -252,14 +249,10 @@ function board(h, w, number) {
 			res++;
 			array.push((i + 1) * num_col + j + 1);
 		}
-		// console.log("the number of unopend grid: " + res);
-		// console.log("the actual count: " + arr[i][j].count);
 		if (res == arr[i][j].count) {
 			for (var x = 0; x < array.length; x++) {
 				var index_x = array[x] / num_col;
 				var index_y = array[x] % num_col;
-				// console.log(Math.floor(index_x));
-				// console.log(Math.floor(index_y));
 				this.mark_grid_AI(Math.floor(index_x), Math.floor(index_y));
 			}
 		}
@@ -322,19 +315,9 @@ function board(h, w, number) {
 	* initialize the board
 	*
 	*
-	*
-	*
-	*
 	*/
 	this.init = function() {
-		// console.log(" i am initializing   ......  ");
-		// console.log(" X " + x);
-		// console.log(" Y " + y);
-
-
 		win = false;
-		//console.log(" win  " + win);
-
 		/**
 		* initialize canvas
 		*/
@@ -342,7 +325,6 @@ function board(h, w, number) {
 		ctx.canvas.width = 700;
 		ctx.canvas.height = 600;
 		
-
 		/**
 		* two dimensional array filled with mine
 		*/
@@ -374,25 +356,9 @@ function board(h, w, number) {
 				if (arr[i][j].isMine) {
 					ctx.fillStyle = "#3399FF";
 					ctx.fillRect((size_grid + size_blank) * i, (size_grid + size_blank) * j, size_grid, size_grid);
-					// ctx.fillStyle = "black";
-					// ctx.font = '12pt Calibri';
-					// ctx.fillText(arr[i][j].count.toString(), 23 * i + 10, 23 * j + 15);
-					// ctx.stroke();
-					
-					// ctx.fillStyle = "grey";
-					// ctx.fillRect((size_grid + size_blank) * i, (size_grid + size_blank) * j, size_grid, size_grid);
-					
 				} else {
 					ctx.fillStyle = "#3399FF";
-					ctx.fillRect((size_grid + size_blank) * i, (size_grid + size_blank) * j, size_grid, size_grid);
-					// ctx.fillStyle = "black";
-					// ctx.font = '12pt Calibri';
-					// ctx.fillText(arr[i][j].count.toString(), (size_grid + size_blank) * i + 10, (size_grid + size_blank) * j + 15);
-					// ctx.stroke();
-					
-					// ctx.fillStyle = "grey";
-					// ctx.fillRect((size_grid + size_blank) * i, (size_grid + size_blank) * j, size_grid, size_grid);
-					
+					ctx.fillRect((size_grid + size_blank) * i, (size_grid + size_blank) * j, size_grid, size_grid);				
 				}
 			}
 		}
