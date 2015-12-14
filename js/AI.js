@@ -110,26 +110,20 @@ function AIshow() {
 					continue;
 				}
 				if (res[i][j] / solutionNum < little) {
-					littleIndex = cur[j];
+					littleIndex = i;
 					little = res[i][j] / solutionNum;
 				}
 				if (res[i][j] / solutionNum > big) {
-					bigIndex = cur[j];
+					bigIndex = i;
 					big = res[i][j] / solutionNum;
 				}
 			}
 		}
 		if (mark) return;
 		if (little <= 1 - big) {
-			var col = Math.floor(littleIndex / num_row);
-			var row = Math.floor(littleIndex % num_row);
-			console.log("click" + col + " " + row);
-			b.open_grid(col, row);
+			compareLeastLargest(res[littleIndex], islands[littleIndex]);
 		} else {
-			var col = Math.floor(bigIndex / num_row);
-			var row = Math.floor(bigIndex % num_row);
-			console.log("mark" + col + " " + row);
-			b.mark_grid_AI(col, row);
+			compareLeastLargest(res[bigIndex], islands[bigIndex]);
 		}
 
 	}
@@ -162,7 +156,7 @@ function AIshow() {
 			//clickLeast(stats, min, unknown);
 
 			// markLargest(stats, max, unknown);
-			 compareLeastLargest(stats, min, max, unknown);
+			 compareLeastLargest(stats, unknown);
 		}
 
 	}
@@ -194,8 +188,33 @@ function AIshow() {
 			}
 		}
 	}
-	function compareLeastLargest (stats, min, max, unknown) {
-		if (min <= stats[stats.length - 1] - max) {
+	function compareLeastLargest (stats, unknown) {
+		var min = 1000;
+		var max = 0;
+		for (var i = 0; i < stats.length - 1; i++) {
+			min = Math.min(min, stats[i]);
+			max = Math.max(max, stats[i]);
+		}
+
+		if (min < stats[stats.length - 1] - max) {
+			clickLeast(stats, min, unknown);
+			return;
+		} else if (min > stats[stats.length - 1] - max) {
+			markLargest(stats, max, unknown);
+			return;
+		}
+		var minCount = 0;
+		var maxCount = 0;
+		for (var i = 0; i < stats.length - 1; i++) {
+			var cur = stats[i];
+			if (cur == min) {
+				minCount++;
+			} 
+			if (cur == max) {
+				maxCount++;
+			}
+		}
+		if (minCount <= maxCount) {
 			clickLeast(stats, min, unknown);
 		} else {
 			markLargest(stats, max, unknown);
