@@ -58,8 +58,11 @@ function AIshow() {
 				b.randomClick();
 				return;
 			}
+			if (b.getUnknownBoundary().length <= 10) {
+				singleAreaSolve();
+			}
 			//singleAreaSolve();
-			islandSolve();
+			else islandSolve();
 		}
 	
 	}
@@ -69,7 +72,10 @@ function AIshow() {
 		var res = new Array;
 		var min = 1000;
 		for (var i = 0; i < islands.length; i++) {
+			console.log("tank islands" );
+			console.log(islands[i]);
 			var cur = TankSolver(islands[i]);
+
 			res.push(cur);
 		}
 		for (var i = 0; i < res.length; i++) {
@@ -152,6 +158,7 @@ function AIshow() {
 				}
 			}
 			if (total > remain){
+				console.log(total + " " + remain);
 				console.log("invalid");
 				return;
 			} 

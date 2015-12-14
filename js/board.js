@@ -762,6 +762,7 @@ function board(h, w, number) {
 				if (board[i][j] == 1) {
 					var list = new Array;
 					list.push(i * num_row + j);
+					board[i][j] = 0;
 					dfs(board, i, j, list);
 					islands.push(list);
 				}
