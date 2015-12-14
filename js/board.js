@@ -15,6 +15,11 @@ function board(h, w, number) {
 	var end = false;
 
 	/**
+	* judge the game is win or lost
+	*/
+	var win = false;
+
+	/**
 	* x is height, y is width, num is the number of mines
 	*/
 	var num_open = 0;
@@ -43,6 +48,15 @@ function board(h, w, number) {
 	*/
 	this.getGameStatus = function() {
 		return end;
+	}
+
+
+	/**
+	*  get game status
+	*
+	*/
+	this.getGameResult = function() {
+		return win;
 	}
 
 
@@ -313,6 +327,13 @@ function board(h, w, number) {
 	*
 	*/
 	this.init = function() {
+		console.log(" i am initializing   ......  ");
+		console.log(" X " + x);
+		console.log(" Y " + y);
+
+
+		win = false;
+		console.log(" win  " + win);
 
 		/**
 		* initialize canvas
@@ -406,6 +427,7 @@ function board(h, w, number) {
 					this.show_mines();
 					end = true;
 					start_time = 0;
+					win = false;
 					document.getElementById("timer").innerHTML = "Oops! You lose the game!";
 				} else {
 					ctx.fillStyle = "#E8E8E8";
@@ -422,6 +444,7 @@ function board(h, w, number) {
 			} 
 			if (num_open == num_col * num_row - num_mine) {
 				timer();
+				win = true;
 				start_time = 0;
 			}
 		}

@@ -1,5 +1,7 @@
 
 function AIshow() {
+	var judge = false;
+
 	/**
 	 * Returns a random number between 0 and num_row * num_col
 	 */
@@ -12,12 +14,14 @@ function AIshow() {
 	 * straightforward AI method
 	 */
 	this.straightForward = function() {
+		document.getElementById("AI").disabled = true;
+		judge = true;
 		var index = getRandomArbitrary();
 		var x = Math.floor(index / num_row);
 		var y = Math.floor(index % num_row);
 		
 		var number_open_before = b.get_number_open();
-		console.log(number_open_before);
+		//console.log(number_open_before);
 
 		/*
         * make sure that user can't click a mine or a grid with count don't equal 0
@@ -59,6 +63,7 @@ function AIshow() {
 			var unknown = b.getUnknownBoundary();
 			if (unknown.length == 0) {
 				b.randomClick();
+				//document.getElementById("AI").disabled = false;
 				return;
 			}
 			for (var i =0; i < stats.length; i++) {
@@ -80,30 +85,34 @@ function AIshow() {
 				 compareLeastLargest(stats, min, max, unknown);
 			}
 		}
+		document.getElementById("AI").disabled = false;
+		judge = false;
 	
 	}
 	function clickLeast(stats, min, unknown) {
-		console.log(stats);
-		console.log("dangerous: " + "min = " + min);
+		// console.log(stats);
+		// console.log("dangerous: " + "min = " + min);
 		for (var i =0; i < stats.length; i++) {
 			if (stats[i] == min) {
 				var cur = unknown[i];
 				var col = Math.floor(cur / num_row);
 				var row = Math.floor(cur % num_row);
 				b.open_grid(col, row);
+				//console.log("index is : " + col + " and : " + row);
 				break;
 			}
 		}
 	}
 	function markLargest(stats, max, unknown) {
-		console.log(stats);
-		console.log("dangerous: " + "max = " + max);
+		// console.log(stats);
+		// console.log("dangerous: " + "max = " + max);
 		for (var i =0; i < stats.length; i++) {
 			if (stats[i] == max) {
 				var cur = unknown[i];
 				var col = Math.floor(cur / num_row);
 				var row = Math.floor(cur % num_row);
 				b.mark_grid_AI(col, row);
+				//console.log("index is : " + col + " and : " + row);
 				break;
 			}
 		}
@@ -129,7 +138,7 @@ function AIshow() {
 
 	}
 	function TankSolver() {
-		console.log("Tank");
+		//console.log("Tank");
 		var unknown = b.getUnknownBoundary();
 		var boundary = b.getOpenBoundary();
 		var stats = new Array;
@@ -168,7 +177,7 @@ function AIshow() {
 				}
 			}
 			if (total > remain){
-				console.log("invalid");
+				//console.log("invalid");
 				return;
 
 			} 
@@ -187,11 +196,12 @@ function AIshow() {
 		var col = Math.floor(cur / num_row);
 		var row = Math.floor(cur % num_row);
 		b.setFlag(col, row, 2);
-		recurse(unknown, boundary, stats, k + 1);
+		recurse(unknown, boundary, stats, k + 1, remain);
 		b.setFlag(col, row, 3);
-		recurse(unknown, boundary, stats, k + 1);
+		recurse(unknown, boundary, stats, k + 1, remain);
 		b.setFlag(col, row, 0);
 	}
+
 
 	/**
 	 * automatically solve minesweeper using AI algo
@@ -202,12 +212,19 @@ function AIshow() {
 		// 	this.straightForward();
 		// 	console.log(b.getGameStatus());
 		// }
-
-		for (var i = 0; i < 10; i++) {
-			console.log("aaaaa");
+		while (b.getGameStatus() == false && judge == false) {
+			//console.log("aaaaa");
+			
 			this.straightForward();
-			console.log(b.getGameStatus());
+			//console.log("judge : " + judge);
+		
+			//console.log(b.getGameStatus());
 		}
+		// for (var i = 0; i < 10; i++) {
+		// 	console.log("aaaaa");
+		// 	this.straightForward();
+		// 	console.log(b.getGameStatus());
+		// }
 	}
 }
 

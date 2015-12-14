@@ -39,7 +39,6 @@ window.onload = function(){
 
 
 	document.getElementById('AI').onclick = function() {
-		console.log("ai show");
 		var ai = new AIshow();
 		ai.straightForward();
 		//ai.getPeripheryIndex();
@@ -55,6 +54,7 @@ window.onload = function(){
 		var ai = new AIshow();
 		ai.autoSolver();
 	};
+
 
 	/**
 	* add left click listener on canvas 
@@ -82,6 +82,7 @@ window.onload = function(){
 * initialize the game
 */
 function initialize(x, y, number) {
+	document.getElementById("AI").disabled = false;
 	b = new board(x, y, number);
 	b.init();
 };
