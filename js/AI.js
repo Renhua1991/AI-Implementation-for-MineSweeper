@@ -62,11 +62,11 @@ function AIshow() {
 				b.randomClick();
 				return;
 			}
-			singleAreaSolve();
-			// if (b.getUnknownBoundary().length <= 10) {
-			// 	singleAreaSolve();
-			// }
-			// else islandSolve();
+			//singleAreaSolve();
+			if (b.getUnknownBoundary().length <= 10) {
+				singleAreaSolve();
+			}
+			else islandSolve();
 		}
 		document.getElementById("AI").disabled = false;
 		judge = false;
@@ -84,28 +84,29 @@ function AIshow() {
 
 			res.push(cur);
 		}
-		for (var i = 0; i < res.length; i++) {
-			var cur = res[i];
-			for (var j = 0; j < cur.length; j++) {
-				if (cur[j] == 0) {
-					min = 0;
-					var num = islands[i][j];
-					var col = Math.floor(num / num_row);
-					var row = Math.floor(num % num_row);
-					b.open_grid(col, row);
-				}
-			}
-		}
-		if (min == 0) {
-			return;
-		}
-		console.log("calculate");
+		// for (var i = 0; i < res.length; i++) {
+		// 	var cur = res[i];
+		// 	for (var j = 0; j < cur.length; j++) {
+		// 		if (cur[j] == 0) {
+		// 			min = 0;
+		// 			var num = islands[i][j];
+		// 			var col = Math.floor(num / num_row);
+		// 			var row = Math.floor(num % num_row);
+		// 			b.open_grid(col, row);
+		// 		}
+		// 	}
+		// }
+		// if (min == 0) {
+		// 	return;
+		// }
+		// console.log("calculate");
 		
 		var little = 1;
 		var big = 0;
 		var littleIndex = 0;
 		var bigIndex = 0;
 		var resIndex = new Array;
+		var mark = false;
 		for (var i = 0; i < islands.length; i++) {
 			var cur = islands[i];
 			var curRes = new Array;
@@ -114,6 +115,24 @@ function AIshow() {
 			resIndex.push(curRes);
 			var solutionNum = curRes.length;
 			for (var j = 0; j < res[i].length; j++) {
+				if (res[i][j] == 0) {
+					console.log("empty for sure");
+					var open = cur[j];
+					var col = Math.floor(open / num_row);
+					var row = Math.floor(open % num_row);
+					b.open_grid(col, row);
+					mark = true;
+					continue;
+				}
+				if (res[i][j] == solutionNum) {
+					console.log("dangerous for sure");
+					var open = cur[j];
+					var col = Math.floor(open / num_row);
+					var row = Math.floor(open % num_row);
+					b.mark_grid_AI(col, row);
+					mark = true;
+					continue;
+				}
 				if (res[i][j] / solutionNum < little) {
 					littleIndex = cur[j];
 					little = res[i][j] / solutionNum;
@@ -123,6 +142,9 @@ function AIshow() {
 					big = res[i][j] / solutionNum;
 				}
 			}
+		}
+		if (mark) {
+			return;
 		}
 		if (little <= 1 - big) {
 			var col = Math.floor(littleIndex / num_row);
@@ -231,7 +253,7 @@ function AIshow() {
 				var col = Math.floor(cur / num_row);
 				var row = Math.floor(cur % num_row);
 				b.open_grid(col, row);
-				//console.log("index is : " + col + " and : " + row);
+				console.log("index is : " + col + " and " + row);
 				break;
 			}
 		}
@@ -245,7 +267,7 @@ function AIshow() {
 				var col = Math.floor(cur / num_row);
 				var row = Math.floor(cur % num_row);
 				b.mark_grid_AI(col, row);
-				//console.log("index is : " + col + " and : " + row);
+				console.log("index is : " + col + " and " + row);
 				break;
 			}
 		}

@@ -3,7 +3,7 @@ from selenium.webdriver.common.keys import Keys
 import time
 
 driver = webdriver.Firefox()
-driver.get("file:///Users/renhua/Documents/AI-Implementation-for-MineSweeper/html/play.html")
+driver.get("file:///Users/feizhoupeng/Desktop/AI-Implementation-for-MineSweeper/html/play.html")
 
 counter = 0
 index = 0
